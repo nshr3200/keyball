@@ -35,9 +35,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAP_CODE_DELAY 5
 #define COMBO_COUNT 4
-#define TAPPING_TERM 200  // ѓ_ѓuѓ‹ѓ^ѓbѓv‚МЋћЉФ‚Ми‡’lЃiѓ~ѓЉ•bЃj
-#define HOLD_ON_OTHER_KEY_PRESS  // ѓzЃ[ѓ‹ѓh‚µ‚Д‚ў‚й‚Ж‚«‚М‹““®‚р’и‹`
+#define TAPPING_TERM 200  // пїЅ_пїЅuпїЅпїЅпїЅ^пїЅbпїЅvпїЅМЋпїЅпїЅФ‚пїЅи‡’lпїЅiпїЅ~пїЅпїЅпїЅbпїЅj
+#define HOLD_ON_OTHER_KEY_PRESS  // пїЅzпїЅ[пїЅпїЅпїЅhпїЅпїЅпїЅД‚пїЅпїЅпїЅЖ‚пїЅпїЅМ‹пїЅпїЅпїЅпїЅпїЅпїЅ`
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_DEFAULT_LAYER 4
+#define AUTO_MOUSE_DEFAULT_LAYER 1
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6

@@ -172,8 +172,8 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 1
-    keyball_set_scroll_mode(get_highest_layer(state) == 1);
+    // Auto enable scroll mode when the highest layer is 3
+    keyball_set_scroll_mode(get_highest_layer(state) == 3);
     return state;
 }
 
@@ -183,10 +183,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OS_MAC:
             if (record->event.pressed) {
-                is_mac_mode = true;  // OSƒ‚[ƒh‚ğØ‚è‘Ö‚¦‚é
-                // •K—v‚É‰‚¶‚ÄLED‚È‚Ç‚Åƒ‚[ƒh‚ğ•\¦
+                is_mac_mode = true;  // OSï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½Ø‚ï¿½Ö‚ï¿½ï¿½ï¿½
+                // ï¿½Kï¿½vï¿½É‰ï¿½ï¿½ï¿½ï¿½ï¿½LEDï¿½È‚Ç‚Åƒï¿½ï¿½[ï¿½hï¿½ï¿½\ï¿½ï¿½
             }
-            return false;  // ˆÈ~‚Ìˆ—‚ğ’â~
+            return false;  // ï¿½È~ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
         case OS_WIN:
             if (record->event.pressed) {
                 is_mac_mode = false;
@@ -195,20 +195,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_CTL:
             if (record->event.pressed) {
                 if (is_mac_mode) {
-                    register_code(KC_LGUI);  // Macƒ‚[ƒh‚Å‚ÍCommandƒL[‚ğ“o˜^
+                    register_code(KC_LGUI);  // Macï¿½ï¿½ï¿½[ï¿½hï¿½Å‚ï¿½Commandï¿½Lï¿½[ï¿½ï¿½oï¿½^
                 } else {
-                    register_code(KC_LCTL);  // Windowsƒ‚[ƒh‚Å‚ÍCtrlƒL[‚ğ“o˜^
+                    register_code(KC_LCTL);  // Windowsï¿½ï¿½ï¿½[ï¿½hï¿½Å‚ï¿½Ctrlï¿½Lï¿½[ï¿½ï¿½oï¿½^
                 }
             } else {
                 if (is_mac_mode) {
-                    unregister_code(KC_LGUI);  // ƒL[‚ğ‰ğœ
+                    unregister_code(KC_LGUI);  // ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 } else {
                     unregister_code(KC_LCTL);
                 }
             }
-            return false;  // ˆÈ~‚Ìˆ—‚ğ’â~
+            return false;  // ï¿½È~ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
         default:
-            return true;  // ‘¼‚ÌƒL[‚ÍƒfƒtƒHƒ‹ƒg‚Ì“®ì
+            return true;  // ï¿½ï¿½ï¿½ÌƒLï¿½[ï¿½Íƒfï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Ì“ï¿½ï¿½ï¿½
     }
 }
 
