@@ -20,36 +20,59 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+enum layer {
+  _BASE,
+  _SYM,
+  _NUM,
+  _NAV,
+  _BSDL,
+  _GAME
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
-  [0] = LAYOUT_universal(
+  [_BASE] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_DEL   ,
-    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , S(KC_7)  ,
-    KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_INT1  ,
-              KC_LALT,KC_LGUI,LCTL_T(KC_LNG2)     ,LT(1,KC_SPC),LT(3,KC_LNG1),                  KC_BSPC,LT(2,KC_ENT), RCTL_T(KC_LNG2),     KC_RALT  , KC_PSCR
+LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_ENT   ,
+    KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_RGUI  ,
+                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                   KC_RALT  ,  LT(_NAV,KC_SPC)     , XXXXXXX  , XXXXXXX  , TO(_GAME)
   ),
 
-  [1] = LAYOUT_universal(
-    SSNP_FRE ,  KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
-    SSNP_VRT ,  _______ , _______  , KC_UP   , KC_ENT   , KC_DEL   ,                                         KC_PGUP  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_BTN3  , KC_F12   ,
-    SSNP_HOR ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
-                  _______  , _______ , _______  ,         _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+  [_SYM] = LAYOUT_universal(
+    KC_NO    , KC_HASH  , KC_CIRC  , KC_ASTR  , KC_LCBR  , KC_QUOT  ,                                        KC_DQUO  , KC_RCBR  , KC_AMPR  , KC_DLR   , KC_BSLS  , KC_COLN  ,
+    KC_NO    , KC_PERC  , KC_EXLM  , KC_EQL   , KC_LPRN  , KC_PLUS  ,                                        KC_ENT   , KC_RPRN  , KC_COLN  , KC_QUES  , KC_SCLN  , KC_ENT   ,
+    KC_NO    , KC_LABK  , KC_PIPE  , KC_MINS  , KC_RABK  , KC_AT    ,                                        KC_GRV   , KC_LBRC  , KC_COMM  , KC_DOT   , KC_RBRC  , KC_NO    ,
+                          KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO   ,                  KC_RALT  ,  KC_SPC              , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
 
-  [2] = LAYOUT_universal(
-    _______  ,S(KC_QUOT), KC_7     , KC_8    , KC_9     , S(KC_8)  ,                                         S(KC_9)  , S(KC_1)  , S(KC_6)  , KC_LBRC  , S(KC_4)  , _______  ,
-    _______  ,S(KC_SCLN), KC_4     , KC_5    , KC_6     , KC_RBRC  ,                                         KC_NUHS  , KC_MINS  , S(KC_EQL), S(KC_3)  , KC_QUOT  , S(KC_2)  ,
-    _______  ,S(KC_MINS), KC_1     , KC_2    , KC_3     ,S(KC_RBRC),                                        S(KC_NUHS),S(KC_INT1), KC_EQL   ,S(KC_LBRC),S(KC_SLSH),S(KC_INT3),
-                  KC_0     , KC_DOT  , _______  ,         _______  , _______  ,                   KC_DEL   , _______  , _______       , _______  , _______
+  [_NUM] = LAYOUT_universal(
+    KC_NO    , KC_0     , KC_7     , KC_8     , KC_9     , KC_ASTR  ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_0     , KC_4     , KC_5     , KC_6     , KC_PLUS  ,                                        KC_ENT   , KC_NO    , KC_COLN  , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_0     , KC_1     , KC_2     , KC_3     , KC_MINS  ,                                        KC_NO    , KC_NO    , KC_COMM  , KC_DOT   , KC_SLSH  , KC_NO    ,
+                          KC_NO    , KC_NO    , XXXXXXX  , KC_NO    , KC_NO    ,                 KC_NO    ,  KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
-  [3] = LAYOUT_universal(
-    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  , _______  ,                                        RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN , RGB_M_K  ,
-    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , _______  , SCRL_DVI ,                                        RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW , _______  , _______  ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , _______  , SCRL_DVD ,                                        CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , _______  , KBC_SAVE ,
-                  QK_BOOT  , KBC_RST  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , KBC_RST  , QK_BOOT
+  [_NAV] = LAYOUT_universal(
+    KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
+    KC_NO    , KC_RALT   , KC_LSFT  , KC_NO    , KC_NO    , KC_LGUI ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , OS_CTL   , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_HASH  , KC_RBRC  , KC_NO    , KC_NO    ,
+                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,                 KC_NO    ,  XXXXXXX             , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
+
+  [_BSDL] = LAYOUT_universal(
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_BSPC  , KC_DEL   , KC_NO    , KC_NO    ,
+                          KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
+  ),
+
+  [_GAME] = LAYOUT_universal(
+    KC_NO    , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
+    KC_NO    , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_NO       ,
+    KC_NO    , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_NO    ,
+                          TO(_BASE), TO(_BASE), KC_NO    , KC_RSFT  , KC_NO    ,                  KC_NO   ,  KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
+  )
 };
 // clang-format on
 
