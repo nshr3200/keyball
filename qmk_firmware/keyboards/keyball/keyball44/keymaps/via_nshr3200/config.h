@@ -34,7 +34,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define TAP_CODE_DELAY 5
-
+#define COMBO_COUNT 4
+#define TAPPING_TERM 200  // ダブルタップの時間の閾値（ミリ秒）
+#define HOLD_ON_OTHER_KEY_PRESS  // ホールドしているときの挙動を定義
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 

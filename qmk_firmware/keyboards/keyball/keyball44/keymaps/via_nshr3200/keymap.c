@@ -20,7 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-enum layer {
+enum combo_events {
+  COMM_DOT_UNDERSCORE,
+  DOT_SLSH_TILD,
+  //DOT_SLSH_NUMWORD,
+  J_K_L_LNG1,
+  S_D_F_LNG2,
+  COMBO_LENGTH
+};enum layer {
   _BASE,
   _SYM,
   _NUM,
@@ -29,21 +36,109 @@ enum layer {
   _GAME
 };
 
-// clang-format off
+enum {
+    TD_LAYER_SHIFT,
+};
+
+enum custom_keycodes {
+    OS_MAC = SAFE_RANGE,
+    OS_WIN,
+    OS_CTL,
+};
+
+typedef struct {
+    bool is_press_action;
+    uint8_t state;
+} td_tap_t;
+
+enum {
+    SINGLE_TAP = 1,
+    SINGLE_HOLD,
+    DOUBLE_TAP,
+    UNKNOWN,
+};
+
+static td_tap_t td_state;
+
+uint8_t dance_layer_shift_dance(tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state->pressed) {
+            return SINGLE_HOLD;
+        } else {
+            return SINGLE_TAP;
+        }
+    } else if (state->count == 2) {
+        return DOUBLE_TAP;
+    } else {
+        return UNKNOWN;
+    }
+}
+
+void dance_layer_shift_finished(tap_dance_state_t *state, void *user_data) {
+    td_state.state = dance_layer_shift_dance(state);
+    switch (td_state.state) {
+        case SINGLE_TAP:
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
+            break;
+        case SINGLE_HOLD:
+            //layer_on(_NAV);
+            register_mods(MOD_BIT(KC_LSFT));
+            break;
+        case DOUBLE_TAP:
+            caps_word_on();
+            break;
+        default:
+            break;
+    }
+}
+
+void dance_layer_shift_reset(tap_dance_state_t *state, void *user_data) {
+    switch (td_state.state) {
+        case SINGLE_HOLD:
+            //layer_off(_NAV);
+            unregister_mods(MOD_BIT(KC_LSFT));
+            break;
+        case SINGLE_TAP:
+            break;
+        case DOUBLE_TAP:
+            break;
+        default:
+            break;
+    }
+    td_state.state = 0;
+}
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_LAYER_SHIFT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layer_shift_finished, dance_layer_shift_reset),
+};
+
+const uint16_t PROGMEM comm_dot[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM dot_slsh[] = {KC_DOT, KC_SLSH, COMBO_END};
+//const uint16_t PROGMEM dot_slsh[] = {KC_DOT, NUM_WORD, COMBO_END};
+const uint16_t PROGMEM j_k_l[] = {KC_J, KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM s_d_f[] = {KC_S, KC_D, KC_F, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [COMM_DOT_UNDERSCORE] = COMBO(comm_dot, KC_UNDS),
+  [DOT_SLSH_TILD] = COMBO(dot_slsh, KC_TILD),
+  //[DOT_SLSH_NUMWORD] = COMBO(dot_slsh, KC_SLSH),
+  [J_K_L_LNG1] = COMBO(j_k_l, KC_LNG1),
+  [S_D_F_LNG2] = COMBO(s_d_f, KC_LNG2),
+};// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [_BASE] = LAYOUT_universal(
-    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_DEL   ,
-LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_ENT   ,
+    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
+LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , TD(TD_LAYER_SHIFT)  , KC_ENT  ,
     KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_RGUI  ,
-                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , KC_LCTL ,                   KC_RALT  ,  LT(_NAV,KC_SPC)     , XXXXXXX  , XXXXXXX  , TO(_GAME)
+                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                   KC_RALT  ,  LT(_NAV,KC_SPC)     , XXXXXXX  , XXXXXXX  , TO(_GAME)
   ),
 
   [_SYM] = LAYOUT_universal(
     KC_NO    , KC_HASH  , KC_CIRC  , KC_ASTR  , KC_LCBR  , KC_QUOT  ,                                        KC_DQUO  , KC_RCBR  , KC_AMPR  , KC_DLR   , KC_BSLS  , KC_COLN  ,
     KC_NO    , KC_PERC  , KC_EXLM  , KC_EQL   , KC_LPRN  , KC_PLUS  ,                                        KC_ENT   , KC_RPRN  , KC_COLN  , KC_QUES  , KC_SCLN  , KC_ENT   ,
     KC_NO    , KC_LABK  , KC_PIPE  , KC_MINS  , KC_RABK  , KC_AT    ,                                        KC_GRV   , KC_LBRC  , KC_COMM  , KC_DOT   , KC_RBRC  , KC_NO    ,
-                          KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO   ,                  KC_RALT  ,  KC_SPC              , XXXXXXX  , XXXXXXX  , XXXXXXX
+                          KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO   ,                  KC_RALT  ,  KC_SPC              , XXXXXXX  , XXXXXXX  , OS_MAC
   ),
 
   [_NUM] = LAYOUT_universal(
@@ -56,8 +151,8 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
   [_NAV] = LAYOUT_universal(
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
     KC_NO    , KC_RALT   , KC_LSFT  , KC_NO    , KC_NO    , KC_LGUI ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO     , KC_NO    , KC_LCTL  , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_HASH  , KC_RBRC  , KC_NO    , KC_NO    ,
-                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,                 KC_NO    ,  XXXXXXX             , XXXXXXX  , XXXXXXX  , XXXXXXX
+    KC_NO    , KC_NO     , KC_NO    , OS_CTL   , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_HASH  , KC_RBRC  , KC_NO    , KC_NO    ,
+                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,                 KC_NO    ,  XXXXXXX             , XXXXXXX  , XXXXXXX  , OS_WIN
   ),
 
   [_BSDL] = LAYOUT_universal(
@@ -82,6 +177,42 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
+bool is_mac_mode = true;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case OS_MAC:
+            if (record->event.pressed) {
+                is_mac_mode = true;  // OSモードを切り替える
+                // 必要に応じてLEDなどでモードを表示
+            }
+            return false;  // 以降の処理を停止
+        case OS_WIN:
+            if (record->event.pressed) {
+                is_mac_mode = false;
+            }
+            return false;
+        case OS_CTL:
+            if (record->event.pressed) {
+                if (is_mac_mode) {
+                    register_code(KC_LGUI);  // MacモードではCommandキーを登録
+                } else {
+                    register_code(KC_LCTL);  // WindowsモードではCtrlキーを登録
+                }
+            } else {
+                if (is_mac_mode) {
+                    unregister_code(KC_LGUI);  // キーを解除
+                } else {
+                    unregister_code(KC_LCTL);
+                }
+            }
+            return false;  // 以降の処理を停止
+        default:
+            return true;  // 他のキーはデフォルトの動作
+    }
+}
+
+
 #ifdef OLED_ENABLE
 
 #    include "lib/oledkit/oledkit.h"
@@ -91,13 +222,4 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_ballinfo();
     keyball_oled_render_layerinfo();
 }
-#endif
-
-#ifdef COMBO_ENABLE
-
-const uint16_t PROGMEM my_jq[] = {KC_J, KC_Q, COMBO_END};
-
-combo_t key_combos[] = {
-COMBO(my_jq, KC_QUES),
-};
 #endif
