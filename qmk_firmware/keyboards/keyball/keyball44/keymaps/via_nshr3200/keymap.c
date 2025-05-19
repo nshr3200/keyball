@@ -29,10 +29,10 @@ enum combo_events {
   COMBO_LENGTH
 };enum layer {
   _BASE,
-  _SYM,
-  _NUM,
-  _NAV,
   _BSDL,
+  _NUM,
+  _SYM,
+  _NAV,
   _GAME
 };
 
@@ -134,11 +134,11 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
                           KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                   KC_RALT  ,  LT(_NAV,KC_SPC)     , XXXXXXX  , XXXXXXX  , TO(_GAME)
   ),
 
-  [_SYM] = LAYOUT_universal(
-    KC_NO    , KC_HASH  , KC_CIRC  , KC_ASTR  , KC_LCBR  , KC_QUOT  ,                                        KC_DQUO  , KC_RCBR  , KC_AMPR  , KC_DLR   , KC_BSLS  , KC_COLN  ,
-    KC_NO    , KC_PERC  , KC_EXLM  , KC_EQL   , KC_LPRN  , KC_PLUS  ,                                        KC_ENT   , KC_RPRN  , KC_COLN  , KC_QUES  , KC_SCLN  , KC_ENT   ,
-    KC_NO    , KC_LABK  , KC_PIPE  , KC_MINS  , KC_RABK  , KC_AT    ,                                        KC_GRV   , KC_LBRC  , KC_COMM  , KC_DOT   , KC_RBRC  , KC_NO    ,
-                          KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO   ,                  KC_RALT  ,  KC_SPC              , XXXXXXX  , XXXXXXX  , OS_MAC
+  [_BSDL] = LAYOUT_universal(
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_BSPC  , KC_DEL   , KC_NO    , KC_NO    ,
+                          KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
   [_NUM] = LAYOUT_universal(
@@ -148,18 +148,18 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
                           KC_NO    , KC_NO    , XXXXXXX  , KC_NO    , KC_NO    ,                 KC_NO    ,  KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
+  [_SYM] = LAYOUT_universal(
+    KC_NO    , KC_HASH  , KC_CIRC  , KC_ASTR  , KC_LCBR  , KC_QUOT  ,                                        KC_DQUO  , KC_RCBR  , KC_AMPR  , KC_DLR   , KC_BSLS  , KC_COLN  ,
+    KC_NO    , KC_PERC  , KC_EXLM  , KC_EQL   , KC_LPRN  , KC_PLUS  ,                                        KC_ENT   , KC_RPRN  , KC_COLN  , KC_QUES  , KC_SCLN  , KC_ENT   ,
+    KC_NO    , KC_LABK  , KC_PIPE  , KC_MINS  , KC_RABK  , KC_AT    ,                                        KC_GRV   , KC_LBRC  , KC_COMM  , KC_DOT   , KC_RBRC  , KC_NO    ,
+                          KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO   ,                  KC_RALT  ,  KC_SPC              , XXXXXXX  , XXXXXXX  , OS_MAC
+  ),
+
   [_NAV] = LAYOUT_universal(
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
     KC_NO    , KC_RALT   , KC_LSFT  , KC_NO    , KC_NO    , KC_LGUI ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO     , KC_NO    , OS_CTL   , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_HASH  , KC_RBRC  , KC_NO    , KC_NO    ,
                            KC_NO    , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,                 KC_NO    ,  XXXXXXX             , XXXXXXX  , XXXXXXX  , OS_WIN
-  ),
-
-  [_BSDL] = LAYOUT_universal(
-    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_BSPC  , KC_DEL   , KC_NO    , KC_NO    ,
-                          KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
   [_GAME] = LAYOUT_universal(
@@ -183,10 +183,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OS_MAC:
             if (record->event.pressed) {
-                is_mac_mode = true;  // OS���[�h��؂�ւ���
-                // �K�v�ɉ�����LED�ȂǂŃ��[�h��\��
+                is_mac_mode = true;
             }
-            return false;  // �ȍ~�̏������~
+            return false;
         case OS_WIN:
             if (record->event.pressed) {
                 is_mac_mode = false;
@@ -195,20 +194,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_CTL:
             if (record->event.pressed) {
                 if (is_mac_mode) {
-                    register_code(KC_LGUI);  // Mac���[�h�ł�Command�L�[��o�^
+                    register_code(KC_LGUI);
                 } else {
-                    register_code(KC_LCTL);  // Windows���[�h�ł�Ctrl�L�[��o�^
+                    register_code(KC_LCTL);
                 }
             } else {
                 if (is_mac_mode) {
-                    unregister_code(KC_LGUI);  // �L�[������
+                    unregister_code(KC_LGUI);
                 } else {
                     unregister_code(KC_LCTL);
                 }
             }
-            return false;  // �ȍ~�̏������~
+            return false;
         default:
-            return true;  // ���̃L�[�̓f�t�H���g�̓���
+            return true;
     }
 }
 

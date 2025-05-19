@@ -35,8 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAP_CODE_DELAY 5
 #define COMBO_COUNT 4
-#define TAPPING_TERM 200  // �_�u���^�b�v�̎��Ԃ�臒l�i�~���b�j
-#define HOLD_ON_OTHER_KEY_PRESS  // �z�[���h���Ă���Ƃ��̋������`
+#define TAPPING_TERM 200
+#define HOLD_ON_OTHER_KEY_PRESS
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 
