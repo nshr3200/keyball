@@ -38,6 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200  // ダブルタップの時間の閾値（ミリ秒）
 #define HOLD_ON_OTHER_KEY_PRESS  // ホールドしているときの挙動を定義
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_DEFAULT_LAYER 1
+#define AUTO_MOUSE_DEFAULT_LAYER 4
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
