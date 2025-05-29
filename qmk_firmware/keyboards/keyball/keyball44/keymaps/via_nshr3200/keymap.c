@@ -125,18 +125,19 @@ combo_t key_combos[COMBO_COUNT] = {
   [J_K_L_LNG1] = COMBO(j_k_l, KC_LNG1),
   [S_D_F_LNG2] = COMBO(s_d_f, KC_LNG2),
 };// clang-format off
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [_BASE] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
-LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , TD(TD_LAYER_SHIFT)  , KC_ENT  ,
-    KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_RGUI  ,
-                          KC_NO    , KC_NO    , MO(_NAV) , MO(_SYM) , OS_CTL ,                   KC_RALT  ,  LT(_NUM,KC_SPC)     , XXXXXXX  , XXXXXXX  , TO(_GAME)
+LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , TD(TD_LAYER_SHIFT)  , KC_ENT ,
+    KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , MO(_SYM) ,
+                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                    KC_RALT  , LT(_NAV, KC_SPC)    , XXXXXXX  , XXXXXXX  , TO(_GAME)
   ),
 
   [_BSDL] = LAYOUT_universal(
-    KC_NO    , KC_NO    , KBC_RST  , KBC_SAVE , AML_TO   , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , SSNP_VRT , SSNP_HOR , SSNP_FRE , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KBC_RST  , KBC_SAVE , AML_TO   , KC_NO    ,                                        KC_NO    , KC_NO    , MS_WHLU  , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , SSNP_VRT , SSNP_HOR , SSNP_FRE , KC_NO    ,                                        KC_NO    , MS_BTN1  , MS_WHLD  , MS_BTN2  , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_BSPC  , KC_DEL   , KC_NO    , KC_NO    ,
                           KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
@@ -164,7 +165,7 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
 
   [_GAME] = LAYOUT_universal(
     KC_NO    , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
-    KC_NO    , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_NO       ,
+    KC_NO    , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_NO    ,
     KC_NO    , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_NO    ,
                           TO(_BASE), TO(_BASE), KC_NO    , KC_RSFT  , KC_NO    ,                  KC_NO   ,  KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
   )
