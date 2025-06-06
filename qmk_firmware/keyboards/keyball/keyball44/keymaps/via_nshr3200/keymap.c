@@ -159,8 +159,8 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
   ),
 
   [_NAV] = LAYOUT_universal(
-    KC_NO    , KC_NO     , KC_NO    , KC_WH_U  , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_WH_U  , KC_NO    ,
-    KC_NO    , KC_NO     , KC_NO    , KC_WH_D  , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_WH_D  , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_BSPC  , KC_DEL  , KC_RBRC   , KC_NO    ,
                            KC_NO    , KC_NO    , KC_NO    , KC_NO   , OS_CTL    ,                 KC_RALT    ,  KC_LSFT             , XXXXXXX  , XXXXXXX  , AML_TO
   ),
