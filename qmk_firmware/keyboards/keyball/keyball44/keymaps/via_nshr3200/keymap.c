@@ -138,9 +138,9 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
   ),
 
   [_BSDL] = LAYOUT_universal(
-    KC_NO    , KC_NO    , KBC_RST  , KBC_SAVE , AML_TO   , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_WH_U  , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , SSNP_VRT , SSNP_HOR , SSNP_FRE , KC_NO    ,                                        KC_NO    , KC_BTN1  , KC_BTN2  , KC_WH_D  , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_WH_U  , KC_NO    , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_BTN1  , KC_WH_D  , KC_BTN2  , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
                           KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
@@ -148,7 +148,7 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
     KC_NO    , KC_0     , KC_7     , KC_8     , KC_9     , KC_ASTR  ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
     KC_NO    , KC_0     , KC_4     , KC_5     , KC_6     , KC_PLUS  ,                                        KC_ENT   , KC_NO    , KC_COLN  , KC_NO    , KC_NO    , KC_NO    ,
     KC_NO    , KC_0     , KC_1     , KC_2     , KC_3     , KC_MINS  ,                                        KC_NO    , KC_NO    , KC_COMM  , KC_DOT   , KC_SLSH  , KC_NO    ,
-                          KC_NO    , KC_NO    , XXXXXXX  , KC_NO    , KC_NO    ,                 KC_NO    ,  KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
+                          KC_NO    , KC_NO    , XXXXXXX  , KC_NO    , KC_NO    ,                 KC_NO    ,  KC_SPC              , XXXXXXX  , XXXXXXX  , OS_WIN
   ),
 
   [_SYM] = LAYOUT_universal(
@@ -159,10 +159,10 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
   ),
 
   [_NAV] = LAYOUT_universal(
-    KC_NO    , KC_NO     , KC_NO    , KC_WH_U  , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO     , KC_NO    , KC_WH_D  , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_WH_U  , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_WH_U  , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_WH_D  , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_WH_D  , KC_NO    ,
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_BSPC  , KC_DEL  , KC_RBRC   , KC_NO    ,
-                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , OS_CTL    ,                 KC_RALT    ,  KC_LSFT             , XXXXXXX  , XXXXXXX  , OS_WIN
+                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , OS_CTL    ,                 KC_RALT    ,  KC_LSFT             , XXXXXXX  , XXXXXXX  , AML_TO
   ),
 
   [_GAME] = LAYOUT_universal(
