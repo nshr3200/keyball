@@ -27,7 +27,9 @@ enum combo_events {
   J_K_L_LNG1,
   S_D_F_LNG2,
   COMBO_LENGTH
-};enum layer {
+};
+
+enum layer {
   _BASE,
   _BSDL,
   _NUM,
@@ -36,9 +38,9 @@ enum combo_events {
   _GAME
 };
 
-enum {
-    TD_LAYER_SHIFT,
-};
+// enum {
+//     TD_LAYER_SHIFT,
+// };
 
 enum custom_keycodes {
     OS_MAC = SAFE_RANGE,
@@ -46,71 +48,71 @@ enum custom_keycodes {
     OS_CTL,
 };
 
-typedef struct {
-    bool is_press_action;
-    uint8_t state;
-} td_tap_t;
+// typedef struct {
+//     bool is_press_action;
+//     uint8_t state;
+// } td_tap_t;
 
-enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    UNKNOWN,
-};
+// enum {
+//     SINGLE_TAP = 1,
+//     SINGLE_HOLD,
+//     DOUBLE_TAP,
+//     UNKNOWN,
+// };
 
-static td_tap_t td_state;
+// static td_tap_t td_state;
 
-uint8_t dance_layer_shift_dance(tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->pressed) {
-            return SINGLE_HOLD;
-        } else {
-            return SINGLE_TAP;
-        }
-    } else if (state->count == 2) {
-        return DOUBLE_TAP;
-    } else {
-        return UNKNOWN;
-    }
-}
+// uint8_t dance_layer_shift_dance(tap_dance_state_t *state) {
+//     if (state->count == 1) {
+//         if (state->pressed) {
+//             return SINGLE_HOLD;
+//         } else {
+//             return SINGLE_TAP;
+//         }
+//     } else if (state->count == 2) {
+//         return DOUBLE_TAP;
+//     } else {
+//         return UNKNOWN;
+//     }
+// }
 
-void dance_layer_shift_finished(tap_dance_state_t *state, void *user_data) {
-    td_state.state = dance_layer_shift_dance(state);
-    switch (td_state.state) {
-        case SINGLE_TAP:
-            add_oneshot_mods(MOD_BIT(KC_LSFT));
-            break;
-        case SINGLE_HOLD:
-            //layer_on(_NAV);
-            register_mods(MOD_BIT(KC_LSFT));
-            break;
-        case DOUBLE_TAP:
-            caps_word_on();
-            break;
-        default:
-            break;
-    }
-}
+// void dance_layer_shift_finished(tap_dance_state_t *state, void *user_data) {
+//     td_state.state = dance_layer_shift_dance(state);
+//     switch (td_state.state) {
+//         case SINGLE_TAP:
+//             add_oneshot_mods(MOD_BIT(KC_LSFT));
+//             break;
+//         case SINGLE_HOLD:
+//             //layer_on(_NAV);
+//             register_mods(MOD_BIT(KC_LSFT));
+//             break;
+//         case DOUBLE_TAP:
+//             caps_word_on();
+//             break;
+//         default:
+//             break;
+//     }
+// }
 
-void dance_layer_shift_reset(tap_dance_state_t *state, void *user_data) {
-    switch (td_state.state) {
-        case SINGLE_HOLD:
-            //layer_off(_NAV);
-            unregister_mods(MOD_BIT(KC_LSFT));
-            break;
-        case SINGLE_TAP:
-            break;
-        case DOUBLE_TAP:
-            break;
-        default:
-            break;
-    }
-    td_state.state = 0;
-}
+// void dance_layer_shift_reset(tap_dance_state_t *state, void *user_data) {
+//     switch (td_state.state) {
+//         case SINGLE_HOLD:
+//             //layer_off(_NAV);
+//             unregister_mods(MOD_BIT(KC_LSFT));
+//             break;
+//         case SINGLE_TAP:
+//             break;
+//         case DOUBLE_TAP:
+//             break;
+//         default:
+//             break;
+//     }
+//     td_state.state = 0;
+// }
 
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_LAYER_SHIFT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layer_shift_finished, dance_layer_shift_reset),
-};
+// tap_dance_action_t tap_dance_actions[] = {
+//     [TD_LAYER_SHIFT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layer_shift_finished, dance_layer_shift_reset),
+// };
 
 const uint16_t PROGMEM comm_dot[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM dot_slsh[] = {KC_DOT, KC_SLSH, COMBO_END};
@@ -130,15 +132,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [_BASE] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
-LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , TD(TD_LAYER_SHIFT)  , KC_ENT  ,
+LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_ENT    ,
     KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , LT(_SYM,KC_SLSH)    , KC_RGUI ,
-                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                    KC_RALT  , LT(_NAV, KC_SPC)    , XXXXXXX  , XXXXXXX  , TO(_GAME)
+                          KC_NO    , KC_NO    , MO(_NUM) , MO(_SYM) , OS_CTL ,                    KC_RALT  , MT(MOD_LSFT, KC_SPC), XXXXXXX  , XXXXXXX  , TO(_GAME)
   ),
 
   [_BSDL] = LAYOUT_universal(
     KC_NO    , KC_NO    , KBC_RST  , KBC_SAVE , AML_TO   , KC_NO    ,                                        KC_NO    , KC_NO    , KC_NO    , KC_WH_U  , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO    , SSNP_VRT , SSNP_HOR , SSNP_FRE , KC_NO    ,                                        KC_NO    , KC_BTN1  , KC_BTN2  , KC_WH_D  , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_BSPC  , KC_DEL   , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                                        KC_NO    , KC_ENT   , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
                           KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,                  KC_NO    , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
@@ -157,10 +159,10 @@ LT(_BSDL,KC_TAB),KC_A   , KC_S     , KC_D     , KC_F     , KC_G     ,           
   ),
 
   [_NAV] = LAYOUT_universal(
-    KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
-    KC_NO    , KC_RALT   , KC_LSFT  , KC_NO    , KC_NO    , KC_LGUI ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
-    KC_NO    , KC_NO     , KC_NO    , OS_CTL   , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_HASH  , KC_RBRC  , KC_NO    , KC_NO    ,
-                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , KC_NO    ,                 KC_NO    ,  XXXXXXX             , XXXXXXX  , XXXXXXX  , OS_WIN
+    KC_NO    , KC_NO     , KC_NO    , KC_WH_U  , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_WH_D  , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
+    KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_BSPC  , KC_DEL  , KC_RBRC   , KC_NO    ,
+                           KC_NO    , KC_NO    , KC_NO    , KC_NO   , OS_CTL    ,                 KC_RALT    ,  KC_LSFT             , XXXXXXX  , XXXXXXX  , OS_WIN
   ),
 
   [_GAME] = LAYOUT_universal(
