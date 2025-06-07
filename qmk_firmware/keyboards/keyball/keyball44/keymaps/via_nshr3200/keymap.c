@@ -101,8 +101,8 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
 };
 // clang-format on
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == _SYM);
+    // Auto enable scroll mode when the highest layer is larger than 2.
+    keyball_set_scroll_mode(get_highest_layer(state) >= _NUM);
     return state;
 }
 
