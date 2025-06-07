@@ -59,9 +59,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [_BASE] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_NO    ,
-LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , LT(_NUM,KC_SCLN)    , KC_ENT    ,
-    KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , LT(_NAV,KC_SLSH)    , KC_RGUI ,
-                          KC_NO    , KC_NO    , KC_RALT  , MO(_SYM) , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , TO(_GAME)
+LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_ENT   ,
+    KC_LGUI  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , LT(_NUM,KC_SLSH)    , KC_RGUI ,
+                          KC_NO    , KC_NO    , KC_RALT  , MO(_SYM) , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , MO(_NAV)
   ),
 
   [_BSDL] = LAYOUT_universal(
@@ -75,21 +75,21 @@ LT(_NAV,KC_TAB),KC_A    , KC_S     , KC_D     , KC_F     , KC_G     ,           
     KC_NO    , KC_0     , KC_7     , KC_8     , KC_9     , KC_ASTR  ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
     KC_NO    , KC_0     , KC_4     , KC_5     , KC_6     , KC_PLUS  ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , XXXXXXX  , KC_NO    ,
     KC_NO    , KC_0     , KC_1     , KC_2     , KC_3     , KC_MINS  ,                                        KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    ,
-                          KC_COMM  , KC_DOT   , KC_RALT  , MO(_SYM) , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , OS_WIN
+                          KC_COMM  , KC_DOT   , KC_RALT  , MO(_SYM) , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
   [_SYM] = LAYOUT_universal(
     KC_NO    , KC_HASH  , KC_CIRC  , KC_ASTR  , KC_LCBR  , KC_QUOT  ,                                        KC_DQUO  , KC_RCBR  , KC_AMPR  , KC_DLR   , KC_BSLS  , KC_COLN  ,
     MO(_SYM) , KC_PERC  , KC_EXLM  , KC_EQL   , KC_LPRN  , KC_PLUS  ,                                        KC_ENT   , KC_RPRN  , KC_COLN  , KC_QUES  , KC_SCLN  , KC_ENT   ,
     KC_LGUI  , KC_LABK  , KC_PIPE  , KC_MINS  , KC_RABK  , KC_AT    ,                                        KC_GRV   , KC_LBRC  , KC_COMM  , KC_DOT   , KC_RBRC  , KC_NO    ,
-                          KC_NO    , KC_NO    , KC_RALT  , XXXXXXX  , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , OS_MAC
+                          OS_WIN   , OS_MAC   , KC_RALT  , XXXXXXX  , OS_CTL   ,                  KC_RSFT  , KC_SPC              , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
   [_NAV] = LAYOUT_universal(
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_LGUI  , KC_NO   ,                                        KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_NO    , KC_NO    ,
     KC_NO    , KC_NO     , KC_NO    , KC_NO    , KC_NO    , KC_NO   ,                                        KC_NO    , KC_LBRC  , KC_BSPC  , KC_DEL   , KC_RBRC  , KC_NO    ,
-                           KC_NO    , KC_NO    , KC_RALT  , MO(_SYM) , OS_CTL   ,                 KC_RSFT  , KC_NO               , XXXXXXX  , XXXXXXX  , AML_TO
+                           KC_NO    , KC_NO    , KC_RALT  , MO(_SYM) , OS_CTL   ,                 KC_RSFT  , KC_NO               , XXXXXXX  , XXXXXXX  , KC_NO
   ),
 
   [_GAME] = LAYOUT_universal(
