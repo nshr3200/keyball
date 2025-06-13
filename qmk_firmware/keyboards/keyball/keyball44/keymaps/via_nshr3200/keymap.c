@@ -108,6 +108,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 bool is_mac_mode = true;
+// One-shot Shift 用のグローバル変数
+static bool is_os_shift_held = false;
+static uint16_t os_shift_timer = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
